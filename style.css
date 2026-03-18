@@ -721,6 +721,18 @@ footer {
  
   .about { grid-template-columns: 1fr; }
   .about-label { display: flex; }
+  .about-label {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  border-right: none;
+  border-bottom: 1px solid var(--line);
+}
+.section-label {
+  writing-mode: horizontal-tb;
+  transform: none;
+  font-size: 32px;
+}
   .about-content { padding: 48px 24px; }
   .about-heading { font-size: clamp(24px, 6vw, 36px); }
   .about-text { font-size: 16px; }
