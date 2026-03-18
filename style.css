@@ -720,7 +720,7 @@ footer {
   .hero-stats { grid-template-columns: 1fr 1fr; gap: 1px; }
  
   .about { grid-template-columns: 1fr; }
-  .about-label { display: none; }
+  .about-label { display: flex; }
   .about-content { padding: 48px 24px; }
   .about-heading { font-size: clamp(24px, 6vw, 36px); }
   .about-text { font-size: 16px; }
