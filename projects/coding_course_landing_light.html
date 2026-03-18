@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Cairo', sans-serif; background: #f5f7ff; color: #1e1b4b; direction: rtl; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 60%, #ede9fe 100%);
+    padding: 80px 20px 100px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #c7d2fe;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+    top: -300px; left: 50%; transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: #e0e7ff;
+    border: 1px solid #a5b4fc;
+    color: #4338ca;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 6vw, 60px);
+    font-weight: 900;
+    line-height: 1.25;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p { font-size: 18px; color: #6b7280; max-width: 560px; margin: 0 auto 40px; line-height: 1.8; }
+  .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff;
+    border: none;
+    padding: 16px 36px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(79,70,229,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(79,70,229,0.4); }
+  .btn-secondary {
+    background: #fff;
+    color: #4f46e5;
+    border: 1.5px solid #a5b4fc;
+    padding: 16px 36px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-secondary:hover { background: #eef2ff; }
+  .hero-stats { display: flex; justify-content: center; gap: 48px; margin-top: 60px; flex-wrap: wrap; }
+  .stat-num { font-size: 28px; font-weight: 900; color: #4f46e5; }
+  .stat-label { font-size: 13px; color: #9ca3af; margin-top: 4px; }
+
+  /* SECTIONS */
+  section { padding: 80px 20px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    display: inline-block;
+    background: #e0e7ff;
+    color: #4338ca;
+    border: 1px solid #c7d2fe;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .section-title { font-size: clamp(24px, 4vw, 38px); font-weight: 900; color: #1e1b4b; margin-bottom: 12px; }
+  .section-sub { font-size: 16px; color: #9ca3af; margin-bottom: 52px; }
+
+  /* WHAT YOU LEARN */
+  .learn-section { background: #fff; }
+  .learn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .learn-card {
+    background: #f8f9ff;
+    border: 1px solid #e0e7ff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .learn-card:hover { border-color: #a5b4fc; transform: translateY(-4px); box-shadow: 0 8px 24px rgba(99,102,241,0.1); }
+  .learn-icon {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, #e0e7ff, #ede9fe);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+  .learn-card h3 { font-size: 16px; font-weight: 700; color: #1e1b4b; margin-bottom: 8px; }
+  .learn-card p { font-size: 14px; color: #6b7280; line-height: 1.7; }
+
+  /* COURSES */
+  .courses-section { background: #f5f7ff; }
+  .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .course-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .course-card:hover { border-color: #a5b4fc; transform: translateY(-4px); box-shadow: 0 12px 32px rgba(99,102,241,0.1); }
+  .course-card.featured { border: 2px solid #a5b4fc; }
+  .featured-badge {
+    position: absolute; top: 16px; left: 16px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff; font-size: 11px; font-weight: 700;
+    padding: 4px 12px; border-radius: 8px;
+  }
+  .course-thumb {
+    height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 52px;
+  }
+  .course-body { padding: 20px 24px; }
+  .course-level { font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; }
+  .level-beginner { color: #059669; }
+  .level-mid { color: #d97706; }
+  .level-pro { color: #dc2626; }
+  .course-body h3 { font-size: 17px; font-weight: 700; color: #1e1b4b; margin-bottom: 8px; }
+  .course-body p { font-size: 14px; color: #6b7280; line-height: 1.6; margin-bottom: 14px; }
+  .course-meta { display: flex; gap: 14px; flex-wrap: wrap; }
+  .meta-item { font-size: 12px; color: #9ca3af; }
+
+  /* TESTIMONIALS */
+  .testimonials-section { background: #fff; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .review-card {
+    background: #f8f9ff;
+    border: 1px solid #e0e7ff;
+    border-radius: 16px;
+    padding: 24px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .review-card:hover { border-color: #a5b4fc; box-shadow: 0 8px 20px rgba(99,102,241,0.08); }
+  .stars { color: #f59e0b; font-size: 16px; margin-bottom: 12px; }
+  .review-text { font-size: 14px; color: #4b5563; line-height: 1.8; margin-bottom: 20px; font-style: italic; }
+  .reviewer { display: flex; align-items: center; gap: 12px; }
+  .avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px; flex-shrink: 0;
+  }
+  .reviewer-info strong { display: block; font-size: 14px; color: #1e1b4b; }
+  .reviewer-info span { font-size: 12px; color: #9ca3af; }
+
+  /* REGISTER */
+  .register-section {
+    background: linear-gradient(135deg, #eef2ff 0%, #ede9fe 100%);
+    border-top: 1px solid #c7d2fe;
+    text-align: center;
+    padding: 100px 20px;
+  }
+  .register-section h2 {
+    font-size: clamp(28px, 5vw, 48px); font-weight: 900;
+    background: linear-gradient(135deg, #1e1b4b, #4338ca);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 16px;
+  }
+  .register-section p { font-size: 18px; color: #6b7280; margin-bottom: 40px; }
+  .price-display { display: flex; align-items: baseline; justify-content: center; gap: 12px; margin-bottom: 40px; }
+  .price-old { font-size: 20px; color: #9ca3af; text-decoration: line-through; }
+  .price-new { font-size: 48px; font-weight: 900; color: #4f46e5; }
+  .price-currency { font-size: 22px; color: #6366f1; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(30,27,75,0.4); z-index: 1000;
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #fff;
+    border: 1px solid #c7d2fe;
+    border-radius: 20px;
+    padding: 40px;
+    width: 90%; max-width: 440px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(79,70,229,0.15);
+  }
+  .modal h3 { font-size: 24px; font-weight: 900; color: #1e1b4b; margin-bottom: 8px; }
+  .modal p { font-size: 14px; color: #6b7280; margin-bottom: 28px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 13px; color: #374151; margin-bottom: 6px; font-weight: 700; }
+  .form-group input {
+    width: 100%;
+    background: #f8f9ff;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-family: 'Cairo', sans-serif;
+    color: #1e1b4b;
+    outline: none;
+    transition: border-color 0.2s;
+    direction: rtl;
+  }
+  .form-group input:focus { border-color: #6366f1; background: #fff; }
+  .modal-close {
+    position: absolute; top: 16px; left: 16px;
+    background: #f3f4f6; border: none; color: #6b7280;
+    width: 32px; height: 32px; border-radius: 8px;
+    cursor: pointer; font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal-close:hover { background: #e5e7eb; }
+  .success-msg { display: none; text-align: center; padding: 20px; }
+  .success-msg .check { font-size: 48px; margin-bottom: 16px; }
+  .success-msg h4 { font-size: 20px; font-weight: 700; color: #059669; margin-bottom: 8px; }
+  .success-msg p { font-size: 14px; color: #6b7280; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🚀 انضم لـ +5,000 طالب</div>
+  <h1>تعلّم البرمجة<br>من الصفر للاحتراف</h1>
+  <p>كورسات متكاملة بالعربي تأخذك من المبتدئ إلى المحترف مع مشاريع حقيقية وشهادات معتمدة</p>
+  <div class="cta-group">
+    <button class="btn-primary" onclick="openModal()">🎯 سجّل الآن — مجاناً</button>
+    <button class="btn-secondary">▶ شاهد المقدمة</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">+5K</div><div class="stat-label">طالب مسجّل</div></div>
+    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">نسبة الرضا</div></div>
+    <div class="stat"><div class="stat-num">12</div><div class="stat-label">كورس متاح</div></div>
+    <div class="stat"><div class="stat-num">+200</div><div class="stat-label">ساعة تعليمية</div></div>
+  </div>
+</div>
+
+<!-- WHAT YOU LEARN -->
+<section class="learn-section">
+  <div class="container">
+    <div class="section-tag">📚 ماذا ستتعلم؟</div>
+    <h2 class="section-title">مهارات تبنيها خطوة بخطوة</h2>
+    <p class="section-sub">كل مهارة مصممة بعناية لتضمن فهمك الكامل قبل الانتقال للتالية</p>
+    <div class="learn-grid">
+      <div class="learn-card">
+        <div class="learn-icon">💻</div>
+        <h3>أساسيات البرمجة</h3>
+        <p>تعلم التفكير البرمجي والمتغيرات والحلقات والدوال من الصفر بأسلوب سهل ومبسط</p>
+      </div>
+      <div class="learn-card">
+        <div class="learn-icon">🌐</div>
+        <h3>تطوير الويب</h3>
+        <p>HTML, CSS, JavaScript — بناء مواقع احترافية وتفاعلية من الأمام للخلفية</p>
+      </div>
+      <div class="learn-card">
+        <div class="learn-icon">⚛️</div>
+        <h3>React & Next.js</h3>
+        <p>أحدث تقنيات الفرونت إند لبناء تطبيقات ويب سريعة وقابلة للتوسع</p>
+      </div>
+      <div class="learn-card">
+        <div class="learn-icon">🗄️</div>
+        <h3>قواعد البيانات</h3>
+        <p>SQL, NoSQL، تصميم وإدارة البيانات واستخدامها في تطبيقات حقيقية</p>
+      </div>
+      <div class="learn-card">
+        <div class="learn-icon">🔧</div>
+        <h3>الباك إند</h3>
+        <p>Node.js, Python, APIs — بناء الخادم والمنطق والأنظمة المتكاملة</p>
+      </div>
+      <div class="learn-card">
+        <div class="learn-icon">🚀</div>
+        <h3>النشر والـ DevOps</h3>
+        <p>Git, Docker, Cloud — رفع مشاريعك للإنترنت بطريقة احترافية</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="courses-section">
+  <div class="container">
+    <div class="section-tag">🎓 الكورسات المتاحة</div>
+    <h2 class="section-title">اختر مسارك التعليمي</h2>
+    <p class="section-sub">كل كورس مصمم لهدف محدد — من المبتدئ للمحترف</p>
+    <div class="courses-grid">
+      <div class="course-card">
+        <div class="course-thumb" style="background: linear-gradient(135deg, #dbeafe, #eff6ff);">🌐</div>
+        <div class="course-body">
+          <div class="course-level level-beginner">مبتدئ</div>
+          <h3>تطوير الويب من الصفر</h3>
+          <p>HTML, CSS, JavaScript — كل ما تحتاجه لبدء رحلتك في الويب</p>
+          <div class="course-meta">
+            <span class="meta-item">⏱ 40 ساعة</span>
+            <span class="meta-item">📹 120 درس</span>
+            <span class="meta-item">⭐ 4.9</span>
+          </div>
+        </div>
+      </div>
+      <div class="course-card featured">
+        <div class="featured-badge">🔥 الأكثر طلباً</div>
+        <div class="course-thumb" style="background: linear-gradient(135deg, #ede9fe, #f5f3ff);">⚛️</div>
+        <div class="course-body">
+          <div class="course-level level-mid">متوسط</div>
+          <h3>React & Next.js الشامل</h3>
+          <p>بناء تطبيقات ويب احترافية وسريعة بأحدث تقنيات الفرونت إند</p>
+          <div class="course-meta">
+            <span class="meta-item">⏱ 55 ساعة</span>
+            <span class="meta-item">📹 160 درس</span>
+            <span class="meta-item">⭐ 4.8</span>
+          </div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-thumb" style="background: linear-gradient(135deg, #d1fae5, #ecfdf5);">🐍</div>
+        <div class="course-body">
+          <div class="course-level level-beginner">مبتدئ</div>
+          <h3>Python للمبتدئين</h3>
+          <p>تعلم Python من الصفر مع تطبيقات عملية في الأتمتة والتحليل</p>
+          <div class="course-meta">
+            <span class="meta-item">⏱ 35 ساعة</span>
+            <span class="meta-item">📹 100 درس</span>
+            <span class="meta-item">⭐ 4.7</span>
+          </div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-thumb" style="background: linear-gradient(135deg, #fee2e2, #fff1f2);">🔧</div>
+        <div class="course-body">
+          <div class="course-level level-pro">متقدم</div>
+          <h3>Node.js وبناء API</h3>
+          <p>بناء خوادم احترافية وـ APIs قوية مع قواعد البيانات</p>
+          <div class="course-meta">
+            <span class="meta-item">⏱ 48 ساعة</span>
+            <span class="meta-item">📹 140 درس</span>
+            <span class="meta-item">⭐ 4.9</span>
+          </div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-thumb" style="background: linear-gradient(135deg, #d1fae5, #f0fdf4);">📱</div>
+        <div class="course-body">
+          <div class="course-level level-mid">متوسط</div>
+          <h3>تطوير تطبيقات الجوال</h3>
+          <p>React Native لبناء تطبيقات iOS و Android بكود واحد</p>
+          <div class="course-meta">
+            <span class="meta-item">⏱ 50 ساعة</span>
+            <span class="meta-item">📹 135 درس</span>
+            <span class="meta-item">⭐ 4.6</span>
+          </div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-thumb" style="background: linear-gradient(135deg, #fef3c7, #fffbeb);">🤖</div>
+        <div class="course-body">
+          <div class="course-level level-pro">متقدم</div>
+          <h3>الذكاء الاصطناعي بـ Python</h3>
+          <p>Machine Learning, Deep Learning — بناء نماذج AI من الصفر</p>
+          <div class="course-meta">
+            <span class="meta-item">⏱ 65 ساعة</span>
+            <span class="meta-item">📹 190 درس</span>
+            <span class="meta-item">⭐ 4.9</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-tag">💬 آراء الطلاب</div>
+    <h2 class="section-title">ماذا يقول طلابنا؟</h2>
+    <p class="section-sub">+5,000 طالب غيّروا مساراتهم المهنية معنا</p>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"كورس React غيّر حياتي المهنية! الأسلوب واضح والمشاريع العملية ساعدتني أحصل على وظيفتي في 3 أشهر"</p>
+        <div class="reviewer">
+          <div class="avatar" style="background: #e0e7ff; color: #4338ca;">أم</div>
+          <div class="reviewer-info"><strong>أحمد محمد</strong><span>مطور فرونت إند — القاهرة</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"أفضل منصة عربية للبرمجة! شرح ممتاز ودعم مستمر. ابدأت من الصفر وهلأ بشتغل فري لانس"</p>
+        <div class="reviewer">
+          <div class="avatar" style="background: #dbeafe; color: #1d4ed8;">سع</div>
+          <div class="reviewer-info"><strong>سعاد العمري</strong><span>مطورة فول ستاك — عمان</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"استثمار يستاهل 100%! كورس Python للذكاء الاصطناعي كان فوق توقعاتي وحصلت على وظيفة تقنية"</p>
+        <div class="reviewer">
+          <div class="avatar" style="background: #d1fae5; color: #065f46;">خا</div>
+          <div class="reviewer-info"><strong>خالد الرشيدي</strong><span>مهندس AI — الرياض</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★☆</div>
+        <p class="review-text">"المنهج منظم جداً والتمارين عملية. كورس Node.js ساعدني أبني مشروعي الخاص من الصفر"</p>
+        <div class="reviewer">
+          <div class="avatar" style="background: #fef3c7; color: #92400e;">نو</div>
+          <div class="reviewer-info"><strong>نور الهدى</strong><span>مطورة باك إند — تونس</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"ما توقعت أتعلم React بهالسرعة! الكورس مرتب وكل درس يكمّل اللي قبله والدعم ممتاز"</p>
+        <div class="reviewer">
+          <div class="avatar" style="background: #fce7f3; color: #9d174d;">من</div>
+          <div class="reviewer-info"><strong>منى الزهراني</strong><span>مطورة UI — جدة</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"الإنستراكتور شارح بطريقة بسيطة والمشاريع حقيقية. أنصح كل شخص يريد دخول البرمجة"</p>
+        <div class="reviewer">
+          <div class="avatar" style="background: #ede9fe; color: #5b21b6;">عم</div>
+          <div class="reviewer-info"><strong>عمر الحسيني</strong><span>مطور ويب — الكويت</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER CTA -->
+<section class="register-section">
+  <div class="container">
+    <div class="section-tag">🎯 سجّل الآن</div>
+    <h2>ابدأ رحلتك اليوم</h2>
+    <p>لا تنتظر أكثر — انضم لآلاف الطلاب الذين غيّروا حياتهم</p>
+    <div class="price-display">
+      <span class="price-old">1,200 ج.م</span>
+      <span class="price-new">499</span>
+      <span class="price-currency">ج.م فقط</span>
+    </div>
+    <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 40px; flex-wrap: wrap;">
+      <span style="font-size: 14px; color: #6b7280;">✅ وصول مدى الحياة</span>
+      <span style="font-size: 14px; color: #6b7280;">✅ شهادة معتمدة</span>
+      <span style="font-size: 14px; color: #6b7280;">✅ ضمان استرداد 30 يوم</span>
+    </div>
+    <button class="btn-primary" onclick="openModal()" style="font-size: 18px; padding: 20px 52px;">🚀 سجّل الآن واحجز مكانك</button>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="form-content">
+      <h3>🎓 سجّل الآن</h3>
+      <p>أدخل بياناتك وسنتواصل معك خلال 24 ساعة</p>
+      <div class="form-group">
+        <label>الاسم الكامل</label>
+        <input type="text" id="name" placeholder="أدخل اسمك الكامل" />
+      </div>
+      <div class="form-group">
+        <label>البريد الإلكتروني</label>
+        <input type="email" id="email" placeholder="example@email.com" />
+      </div>
+      <div class="form-group">
+        <label>رقم الهاتف</label>
+        <input type="tel" id="phone" placeholder="+20 100 000 0000" />
+      </div>
+      <button class="btn-primary" onclick="submitForm()" style="width:100%; margin-top: 8px; font-size: 16px;">✅ تأكيد التسجيل</button>
+    </div>
+    <div class="success-msg" id="success-msg">
+      <div class="check">🎉</div>
+      <h4>تم التسجيل بنجاح!</h4>
+      <p>شكراً لك! سنتواصل معك على البريد الإلكتروني خلال 24 ساعة</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal() { document.getElementById('modal').classList.add('open'); }
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+function submitForm() {
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  if (!name || !email) { alert('يرجى ملء الاسم والبريد الإلكتروني'); return; }
+  document.getElementById('form-content').style.display = 'none';
+  document.getElementById('success-msg').style.display = 'block';
+}
+</script>
+</body>
+</html>
