@@ -215,20 +215,13 @@
       margin-top: 4px;
     }
     .hero-img-placeholder {
-      width: 60%;
-      aspect-ratio: 3/4;
-      background: linear-gradient(180deg, #1a1a1a 0%, #2a1a1a 100%);
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-img-placeholder::after {
-      content: 'ATHLETE PHOTO';
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 3px;
-      color: rgba(245,240,232,0.2);
-    }
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  inset: 0;
+}
 
     /* MARQUEE */
     .marquee-wrap {
@@ -666,7 +659,7 @@
     </div>
     <div class="hero-right">
       <div class="hero-bg-text">GYM</div>
-      <div class="hero-img-placeholder"></div>
+      <img src="./photos-gym.png" alt="athlete" class="hero-img-placeholder" />
       <div class="hero-stats-grid">
         <div class="hero-stat">
           <div class="hero-stat-num">500+</div>
